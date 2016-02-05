@@ -1,0 +1,160 @@
+/*--------------------------------------------------------------------------
+*Copyright &copy; 2016 Cyrus Oliai <cyrusoliai@yahoo.com>
+
+-----------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------
+*A short program that prompts the user for an integer and converts it into a Roman Numeral.
+
+-----------------------------------------------------------------------------*/
+
+
+#include <iostream>
+#include <string>
+
+int part;
+std::string Roman;
+int integer;
+bool keepGoing = true;
+char answer;
+
+int main()
+{
+	void converter();
+
+	while (keepGoing == true)
+	{
+
+		std::cout << "Please enter an integer: ";
+		std::cin >> integer;
+
+		if (integer >= 4000 || integer <= 0)
+		{
+			std::cout << "Error please enter a valid number to convert!";
+		}
+		else
+		{
+			//2897
+			converter();
+			std::cout << std::endl;
+			std::cout << "--> " << Roman;
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << "Would you like to convert another integer (Y/N)? ";
+			std::cin >> answer;
+			if (answer == 'y' || answer == 'Y')
+			{
+				keepGoing = true;
+				Roman = "";
+			}
+			else
+			{
+				keepGoing = false;
+			}
+			std::cout << std::endl;
+		}
+	}
+	system("pause");
+	return 0;
+}
+
+void converter()
+{
+	if (integer >= 1000)
+	{
+		part = integer / 1000;
+		for (int i = 0; i < part; i++)
+		{
+			Roman += 'M';
+		}
+		integer %= 1000;
+	}
+	//897
+	if (integer >= 100)
+	{
+		part = integer / 100;
+		if (part == 9)
+		{
+			Roman += "CM";
+		}
+		else if (part >= 5)
+		{
+			Roman += 'D';
+			for (int i = 0; i < part - 5; i++)
+			{
+				Roman += "C";
+			}
+
+		}
+		else if (part == 4)
+		{
+			Roman += "CD";
+		}
+		else if (part >= 1)
+		{
+			for (int i = 0; i < part; i++)
+			{
+				Roman += "C";
+			}
+		}
+		integer %= 100;
+	}
+	//97
+	if (integer >= 10)
+	{
+		part = integer / 10;
+		if (part == 9)
+		{
+			Roman += "XC";
+		}
+		else if (part >= 5)
+		{
+			Roman += 'L';
+			for (int i = 0; i < part - 5; i++)
+			{
+				Roman += "X";
+			}
+		}
+		else if (part == 4)
+		{
+			Roman += "XL";
+		}
+		else if (part >= 1)
+		{
+			for (int i = 0; i < part; i++)
+			{
+				Roman += "X";
+			}
+		}
+		integer %= 10;
+	}
+	//7
+	if (integer >= 1)
+	{
+		part = integer;
+		if (part == 9)
+		{
+			Roman += "IX";
+		}
+		else if (part >= 5)
+		{
+			Roman += 'V';
+
+			for (int i = 0; i < part - 5; i++)
+			{
+				Roman += 'I';
+			}
+		}
+		else if (part == 4)
+		{
+			Roman += "IV";
+		}
+		else if (part >= 1)
+		{
+			for (int i = 0; i < part; i++)
+			{
+				Roman += 'I';
+			}
+		}
+	}
+}
+
